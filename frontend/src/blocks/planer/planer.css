@@ -1,0 +1,54 @@
+.planer__header{
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  /* or 114% */
+  color: #FFFFFF;
+  margin: auto;
+  max-width: 350px;
+  text-align: center;
+  border-bottom: 1px solid rgb(84,84,84, .7);
+  border-top: 1px solid rgb(84,84,84, .7);
+  padding: 10px 0
+}
+
+.planer__calend{
+  max-width: 880px;
+  border: 1px solid rgb(84,84,84, .7);
+  margin: auto;
+  height: 20px;
+  margin-top: 20px;
+}
+
+.planer__list{
+  max-width: 30%;
+  border: 1px solid rgb(84,84,84, .7);
+  margin: auto;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+.planer__list-header{
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 22px;
+  color: #FFFFFF;
+  margin: auto;
+  width: 80%;
+  padding: 10px 0;
+  text-align: center;
+  border-bottom: 2px solid rgb(84,84,84, .7);
+  border-left: 4px solid rgb(84,84,84, .7);
+}
+
+.planer__wrap{
+  width: 80%;
+  margin: auto;
+  display: flex;
+  
+  margin-bottom: 20px;
+}

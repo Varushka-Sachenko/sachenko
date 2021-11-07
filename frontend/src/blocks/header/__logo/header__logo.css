@@ -1,0 +1,14 @@
+.header__logo{
+    margin-bottom: 41px;
+}
+
+.header__logo:hover{
+    background-color: white;
+}
+@media screen and (max-width: 879px){
+    .header__logo{
+        width: 104px;
+        margin-left: 27px;
+    }
+
+}

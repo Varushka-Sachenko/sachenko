@@ -1,0 +1,25 @@
+.pages__button{
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 35px;
+  line-height: 48px;
+  color: #FFFFFF;
+  background-color: transparent;
+  border: none;
+  width: 50%;
+  text-decoration: none;
+  text-align: center;
+
+
+}
+
+.pages__button:first-child{
+  border-right: 1px solid rgb(84,84,84, .7);
+}
+
+.pages__button:hover{
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity .3s;
+}

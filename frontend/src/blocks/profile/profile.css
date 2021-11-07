@@ -1,0 +1,16 @@
+.profile{
+    max-width: 880px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 146.75px 583.75px 150px;
+}
+
+@media screen and (max-width: 879px){
+    .profile{
+        max-width: 282px;
+        grid-template-columns: 282px;
+        row-gap: 22.5px;
+        justify-items: center;
+        text-align: center;
+    }
+}

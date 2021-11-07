@@ -1,0 +1,16 @@
+.profile__avatar-overlay {
+    background-image: url(../../../images/edit-button1.svg);
+    grid-column: 1;
+    grid-row: 1;
+    z-index: 1;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-size: 26px;
+    visibility: hidden;
+    background-repeat: no-repeat;
+}
+
+.profile__avatar-overlay:hover{
+    cursor: pointer;
+    visibility: visible;
+}

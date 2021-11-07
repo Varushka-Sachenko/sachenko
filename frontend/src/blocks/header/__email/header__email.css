@@ -1,0 +1,16 @@
+.header__email{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height, or 122% */
+
+    text-align: right;
+
+    color: #FFFFFF;
+    height: max-content;
+    margin: 0;
+    margin-right: 24px;
+
+}
