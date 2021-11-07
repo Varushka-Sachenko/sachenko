@@ -18,7 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r ./build/* varushka@62.84.122.99:/home/varushka/express-mesto/frontend"
+    "deploy": "npm run build && scp -r ./build/* varushka@62.84.122.99:/home/varushka/sachenko/frontend"
   },
   "eslintConfig": {
     "extends": [
