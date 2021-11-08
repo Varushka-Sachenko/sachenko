@@ -20,6 +20,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import InfoTooltip from './InfoTooltip.js';
 import Planer from './Planer';
 import Garden from './Garden';
+import AddBedPopup from './AddBedPopup';
+import AddNotePopup from './AddNotePopup';
 
 import { CurrentUserContext, defaultUserInfo } from '../contexts/CurrentUserContext';
 
@@ -28,41 +30,88 @@ function App(props) {
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isAddBedPopupOpen, setIsAddBedPopupOpen] = React.useState(false);
+  const [isAddNotePopupOpen, setIsAddNotePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isErrorPopupOpened, setIsErrorPopupOpened] = React.useState(false);
   const [isSuccessPopupOpened, setIsSuccessPopupOpened] = React.useState(false);
 
 
- // const [selectedCard, setSelectedCard] = React.useState({ name: "", link: "" });
+  // const [selectedCard, setSelectedCard] = React.useState({ name: "", link: "" });
 
   const [currentUser, setCurrentUser] = React.useState(defaultUserInfo);
 
   const [cards, setCards] = React.useState([]);
+  const [beds, setBeds] = React.useState([]);
+  const [notes, setNotes] = React.useState([]);
 
   const [isLogged, setIsLogged] = React.useState(false);
 
   const [userData, setUserData] = React.useState({ email: "", password: "" });
 
-  const beds = [
-    {"name": "Морковка"},
-    {"name": "Огурцы"},
-  ]
-
   React.useEffect(() => {
     api.getInitialCards()
       .then((res) => {
         const cards = [
-          { "_id": 0, "name": "Удобрение" },
-          { "_id": 1, "name": "Земля" },
-          { "_id": 2, "name": "Грунт" },
-          { "_id": 3, "name": "Лопата" },
+          { "_id": 0, "name": "Морковка" },
+          { "_id": 1, "name": "Огурцы" },
         ]
         setCards(cards)
       })
       .catch((err) => {
+        console.log(err)
         console.log(err);
       })
   }, [])
+
+  React.useEffect(() => {
+    const beds = [
+      { _id: 0, name: "Морковка", soil: "chjxyj gjcflbnm" },
+      { _id: 1, name: "Огурцы", light: "cj,hfnm b pfcjkbnm"  },
+    ]
+    setBeds(beds)
+    // api.getInitialNotes()
+    //   .then((res) => {
+        
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //     console.log(err);
+    //   })
+  }, [])
+
+
+  React.useEffect(() => {
+    const notes = [
+      { _id: 0, name: "Морковка", text: "chjxyj gjcflbnm" },
+      { _id: 1, name: "Огурцы", text: "cj,hfnm b pfcjkbnm"  },
+    ]
+    setNotes(notes)
+    // api.getInitialNotes()
+    //   .then((res) => {
+        
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //     console.log(err);
+    //   })
+  }, [])
+
+  // React.useEffect(() => {
+  //   api.getInitialNotes()
+  //     .then((res) => {
+  //       const notes = [
+  //         { "_id": 0, "name": "Морковка" },
+  //         { "_id": 1, "name": "Огурцы" },
+  //       ]
+  //       setNotes(notes)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //       console.log(err);
+  //     })
+  // }, [])
+
   React.useEffect(() => {
     api.loadUserInfo()
       .then((res) => {
@@ -113,7 +162,8 @@ function App(props) {
     //     })
     // }
     for (let i = 0; i < cards.length; ++i) {
-      if (card.name === cards[i].name) {
+      console.log("delete")
+      if (card === cards[i]) {
         cards.splice(i, 1)
       }
     }
@@ -121,6 +171,10 @@ function App(props) {
   }
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true)
+  }
+
+  const handleAddBedClick = () => {
+    setIsAddBedPopupOpen(true)
   }
 
   const handleEditProfileClick = () => {
@@ -131,6 +185,9 @@ function App(props) {
   const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(true)
   }
+  const handleAddNoteClick = () => {
+    setIsAddNotePopupOpen(true)
+  }
 
   const closeAllPopups = () => {
     setIsAddPlacePopupOpen(false)
@@ -138,6 +195,8 @@ function App(props) {
     setIsEditAvatarPopupOpen(false)
     setIsErrorPopupOpened(false)
     setIsSuccessPopupOpened(false)
+    setIsAddBedPopupOpen(false)
+    setIsAddNotePopupOpen(false)
   }
 
   // const handleCardClick = (card) => {
@@ -187,18 +246,51 @@ function App(props) {
 
   }
 
+  const handleAddBedSubmit = (newBed) => {
+    api.addNewBed(newBed)
+      .then((res) => {
+
+        setCards([res, ...beds]);
+        //console.log(cards)
+        setIsAddBedPopupOpen(false)
+      }
+
+      )
+      .catch((err) => {
+        console.log(err);
+      })
+
+  }
+
+  const handleAddNoteSubmit = (newBed) => {
+    api.addNewBed(newBed)
+      .then((res) => {
+
+        setCards([res, ...notes]);
+        //console.log(cards)
+        setIsAddBedPopupOpen(false)
+      }
+
+      )
+      .catch((err) => {
+        console.log(err);
+      })
+
+  }
+
 
   const tokenCheck = () => {
     // если у пользователя есть токен в localStorage,
     // эта функция проверит валидность токена
+    //localStorage.clear();
     const token = localStorage.getItem('token');
 
     if (token) {
-      console.log(token)
+      //console.log(token)
       // проверим токен
       Auth.getContent(token)
         .then((res) => {
-          //console.log(res)
+          console.log(res)
           if (res) {
 
             // здесь можем получить данные пользователя!
@@ -206,7 +298,7 @@ function App(props) {
               username: res.username,
               email: res.email
             })
-            //console.log(userData)
+            console.log(userData)
             // поместим их в стейт внутри App.js
             setIsLogged(true)
             history.push("/");
@@ -231,14 +323,16 @@ function App(props) {
     history.push(page);
   }
 
+  const signOut = () => {
+
+    localStorage.removeItem('token');
+    setIsLogged(false)
+    history.push('/sign-in');
+  }
+
   const MainComponent = () => {
 
-    const signOut = () => {
 
-      localStorage.removeItem('token');
-      setIsLogged(false)
-      history.push('/sign-in');
-    }
 
 
     return (<>
@@ -293,17 +387,66 @@ function App(props) {
   const planerComponent = () => {
     return (
       <>
-      <Planer elements={cards} onAddItem={handleAddPlaceClick} onCardDelete={handleCardDelete} addNewItem={handleAddPlaceSubmit} />
-      <AddPlacePopup onSubmit={handleAddPlaceSubmit} onClose={closeAllPopups} isOpen={isAddPlacePopupOpen} />
+        <Header signOut={signOut} buttonText="Выйти" link="/sign-up" userEmail={userData.email} />
+        <Planer elements={cards} onAddItem={handleAddPlaceClick} onCardDelete={handleCardDelete} addNewItem={handleAddPlaceSubmit} />
+        <Footer />
+        <AddPlacePopup onSubmit={handleAddPlaceSubmit} onClose={closeAllPopups} isOpen={isAddPlacePopupOpen} />
       </>
     )
   }
 
+  const handleBedDelete = (bed) => {
+    // if (card.owner._id === currentUser._id) {
+    //   api.deleteCard(card._id)
+    //     .then(() => {
+    //       const cardsCopy = cards.filter(elem => elem._id !== card._id);
+    //       setCards(cardsCopy)
+    //     }
+    //     )
+    //     .catch((err) => {
+    //       console.log(err);
+    //     })
+    // }
+    for (let i = 0; i < beds.length; ++i) {
+      console.log("delete")
+      if (bed.name === beds[i]) {
+        beds.splice(i, 1)
+      }
+    }
+  }
+
+
+  const handleNoteDelete = (note) => {
+    // if (card.owner._id === currentUser._id) {
+    //   api.deleteCard(card._id)
+    //     .then(() => {
+    //       const cardsCopy = cards.filter(elem => elem._id !== card._id);
+    //       setCards(cardsCopy)
+    //     }
+    //     )
+    //     .catch((err) => {
+    //       console.log(err);
+    //     })
+    // }
+    for (let i = 0; i < notes.length; ++i) {
+      console.log("delete")
+      if (note === notes[i]) {
+        notes.splice(i, 1)
+      }
+    }
+
+  }
+
+
+
   const gardenComponent = () => {
     return (
       <>
-      <Garden elements={beds} />
-      <PopupWithForm/>
+        <Header signOut={signOut} buttonText="Выйти" link="/sign-up" userEmail={userData.email} />
+        <Garden beds={beds} notes={notes} onAddBed={handleAddBedClick} onAddNote={handleAddNoteClick}/>
+        <Footer />
+        <AddBedPopup onBesDelete={handleBedDelete} onSubmit={handleAddBedSubmit} onClose={closeAllPopups} isOpen={isAddBedPopupOpen}/>
+        <AddNotePopup onNoteDelete={handleNoteDelete} onSubmit={handleAddNoteSubmit} onClose={closeAllPopups} isOpen={isAddNotePopupOpen}/>
       </>
     )
   }
@@ -325,22 +468,24 @@ function App(props) {
               <Login handleSubmit={handleSubmitLogin} setLogged={setIsLogged} handleLogin={handleLogin} userEmail={userData.email} setUserData={setUserData} />
             </Route>
             <ProtectedRoute
-              path="/main"
+              path="/garden"
+              loggedIn={isLogged}
+              component={gardenComponent}
+            />
+
+            <ProtectedRoute
+              path="/planer"
+              loggedIn={isLogged}
+              component={planerComponent}
+            />
+            <ProtectedRoute
+              path="/"
               loggedIn={isLogged}
               component={MainComponent}
             />
             {/* s */}
-            <ProtectedRoute
-              path="/"
-              loggedIn={isLogged}
-              component={gardenComponent}
-            />
-            <ProtectedRoute
-              path="/"
-              loggedIn={isLogged}
-              component={planerComponent}
-            />
-            
+
+
             <Route>
               {isLogged ? (
                 <Redirect to="/" />

@@ -1,5 +1,6 @@
 import React from 'react'
 import Bed from './Bed'
+import Note from './Note'
 function Garden(props) {
   //console.log(props)
   return (
@@ -9,12 +10,12 @@ function Garden(props) {
         <div className="beds__list">
           <div className="planer__wrap">
             <h2 className="beds__list-header">Грядки</h2>
-            <button className="profile__add-button-box"></button>
+            <button className="profile__add-button-box" onClick={props.onAddBed}></button>
           </div>
           <div className="planer__list-elems">
-            {props.elements.map((element) => {
+            {props.beds.map((element) => {
 
-              return (<Bed key={element._id} onCardDelete={props.onCardDelete} cardsToAdd={element} />)
+              return (<Bed key={element._id} onCardDelete={props.onBedDelete} cardsToAdd={element} />)
             })}
           </div>
         </div>
@@ -23,12 +24,12 @@ function Garden(props) {
         <div className="notes__list">
           <div className="planer__wrap">
             <h2 className="beds__list-header">Мой блокнот</h2>
-            <button className="profile__add-button-box"></button>
+            <button className="profile__add-button-box" onClick={props.onAddNote}></button>
           </div>
           <div className="planer__list-elems">
-            {props.elements.map((element) => {
+            {props.notes.map((element) => {
 
-              return (<Bed key={element._id} onCardDelete={props.onCardDelete} cardsToAdd={element} />)
+              return (<Note key={element._id} onCardDelete={props.onNoteDelete} cardsToAdd={element} />)
             })}
           </div>
         </div>

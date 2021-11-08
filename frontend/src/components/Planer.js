@@ -11,7 +11,7 @@ function Planer(props) {
       <div className="planer__list">
         <div className="planer__wrap">
           <h2 className="planer__list-header">Список покупок</h2>
-          <button className="profile__add-button-box"></button>
+          <button className="profile__add-button-box" onClick={props.onAddItem}></button>
         </div>
         <div className="planer__list-elems">
           {props.elements.map((element) => {

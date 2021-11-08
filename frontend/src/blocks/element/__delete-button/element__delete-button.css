@@ -6,6 +6,9 @@
   height: 20px;
   background-color: transparent;
   align-self: center;
+  position: absolute;
+  right: -30px;
+  top: 10px;
 }
 
 .element__delete-button:hover{

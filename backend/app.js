@@ -3,10 +3,13 @@ const mongoose = require('mongoose');
 const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
 
-const { PORT = 3001 } = process.env;
+const { PORT = 3000 } = process.env;
 const { errors } = require('celebrate');
-const route = require('./routes/users');
-const cards = require('./routes/cards');
+
+const purchase = require('./routes/purchases');
+const users = require('./routes/users');
+const garden = require('./routes/garden');
+
 const { login, createUser } = require('./controllers/users');
 
 const auth = require('./middlewares/auth');
@@ -51,9 +54,9 @@ app.post('/signup', celebrate({
 // авторизация
 app.use(auth);
 
-app.use('/', route);
-app.use('/', cards);
-
+app.use('/', users);
+app.use('/', purchase);
+app.use('/', garden);
 app.use(errorLogger);
 
 app.use((req, res, next) => {
