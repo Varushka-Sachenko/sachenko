@@ -17,7 +17,7 @@ export default function AddPlacePopup (props){
     // Запрещаем браузеру переходить по адресу формы
     event.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
-    props.onSubmit({name:cardName})
+    props.onSubmit({name:cardName, _id:props.makeId})
     
 }
 

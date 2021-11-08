@@ -53,8 +53,8 @@ function App(props) {
     api.getInitialCards()
       .then((res) => {
         const cards = [
-          { "_id": 0, "name": "Морковка" },
-          { "_id": 1, "name": "Огурцы" },
+          // { "_id": 0, "name": "Морковка" },
+          // { "_id": 1, "name": "Огурцы" },
         ]
         setCards(cards)
       })
@@ -66,8 +66,8 @@ function App(props) {
 
   React.useEffect(() => {
     const beds = [
-      { _id: 0, name: "Морковка", soil: "chjxyj gjcflbnm" },
-      { _id: 1, name: "Огурцы", light: "cj,hfnm b pfcjkbnm"  },
+      // { _id: 0, name: "Морковка", soil: "chjxyj gjcflbnm" },
+      // { _id: 1, name: "Огурцы", light: "cj,hfnm b pfcjkbnm"  },
     ]
     setBeds(beds)
     // api.getInitialNotes()
@@ -83,8 +83,8 @@ function App(props) {
 
   React.useEffect(() => {
     const notes = [
-      { _id: 0, name: "Морковка", text: "chjxyj gjcflbnm" },
-      { _id: 1, name: "Огурцы", text: "cj,hfnm b pfcjkbnm"  },
+      // { _id: 0, name: "Морковка", text: "chjxyj gjcflbnm" },
+      // { _id: 1, name: "Огурцы", text: "cj,hfnm b pfcjkbnm"  },
     ]
     setNotes(notes)
     // api.getInitialNotes()
@@ -162,13 +162,59 @@ function App(props) {
     //     })
     // }
     for (let i = 0; i < cards.length; ++i) {
-      console.log("delete")
-      if (card === cards[i]) {
+      console.log(card)
+      if (card._id === cards[i]._id) {
         cards.splice(i, 1)
+        console.log(cards)
       }
+      setCards(cards);
     }
 
   }
+
+  const handleBedDelete = (bed) => {
+    // if (card.owner._id === currentUser._id) {
+    //   api.deleteCard(card._id)
+    //     .then(() => {
+    //       const cardsCopy = cards.filter(elem => elem._id !== card._id);
+    //       setCards(cardsCopy)
+    //     }
+    //     )
+    //     .catch((err) => {
+    //       console.log(err);
+    //     })
+    // }
+    for (let i = 0; i < beds.length; ++i) {
+      console.log(bed)
+      if (bed._id === beds[i]._id) {
+        beds.splice(i, 1)
+      }
+      setBeds(beds);
+    }
+
+  }
+
+  const handleNoteDelete = (note) => {
+    // if (card.owner._id === currentUser._id) {
+    //   api.deleteCard(card._id)
+    //     .then(() => {
+    //       const cardsCopy = cards.filter(elem => elem._id !== card._id);
+    //       setCards(cardsCopy)
+    //     }
+    //     )
+    //     .catch((err) => {
+    //       console.log(err);
+    //     })
+    // }
+    for (let i = 0; i < notes.length; ++i) {
+      if (note._id === notes[i]._id) {
+        notes.splice(i, 1)
+      }
+      setNotes(notes);
+    }
+
+  }
+
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true)
   }
@@ -230,51 +276,25 @@ function App(props) {
 
   }
 
-  const handleAddPlaceSubmit = (newCard) => {
-    api.addNewCard(newCard)
-      .then((res) => {
-
-        setCards([res, ...cards]);
+  const handleAddPlaceSubmit = (newBed) => {
+    setCards([newBed, ...cards]);
         //console.log(cards)
-        setIsAddPlacePopupOpen(false)
-      }
-
-      )
-      .catch((err) => {
-        console.log(err);
-      })
+    setIsAddPlacePopupOpen(false)
 
   }
 
   const handleAddBedSubmit = (newBed) => {
-    api.addNewBed(newBed)
-      .then((res) => {
-
-        setCards([res, ...beds]);
+    setBeds([newBed, ...beds]);
         //console.log(cards)
-        setIsAddBedPopupOpen(false)
-      }
+    setIsAddBedPopupOpen(false)
 
-      )
-      .catch((err) => {
-        console.log(err);
-      })
 
   }
 
   const handleAddNoteSubmit = (newBed) => {
-    api.addNewBed(newBed)
-      .then((res) => {
-
-        setCards([res, ...notes]);
+    setNotes([newBed, ...notes]);
         //console.log(cards)
-        setIsAddBedPopupOpen(false)
-      }
-
-      )
-      .catch((err) => {
-        console.log(err);
-      })
+    setIsAddNotePopupOpen(false)
 
   }
 
@@ -282,7 +302,7 @@ function App(props) {
   const tokenCheck = () => {
     // если у пользователя есть токен в localStorage,
     // эта функция проверит валидность токена
-    //localStorage.clear();
+    localStorage.clear();
     const token = localStorage.getItem('token');
 
     if (token) {
@@ -295,7 +315,7 @@ function App(props) {
 
             // здесь можем получить данные пользователя!
             setUserData({
-              username: res.username,
+              username: res.name,
               email: res.email
             })
             console.log(userData)
@@ -390,63 +410,20 @@ function App(props) {
         <Header signOut={signOut} buttonText="Выйти" link="/sign-up" userEmail={userData.email} />
         <Planer elements={cards} onAddItem={handleAddPlaceClick} onCardDelete={handleCardDelete} addNewItem={handleAddPlaceSubmit} />
         <Footer />
-        <AddPlacePopup onSubmit={handleAddPlaceSubmit} onClose={closeAllPopups} isOpen={isAddPlacePopupOpen} />
+        <AddPlacePopup makeId={cards.length} onSubmit={handleAddPlaceSubmit} onClose={closeAllPopups} isOpen={isAddPlacePopupOpen} />
       </>
     )
   }
-
-  const handleBedDelete = (bed) => {
-    // if (card.owner._id === currentUser._id) {
-    //   api.deleteCard(card._id)
-    //     .then(() => {
-    //       const cardsCopy = cards.filter(elem => elem._id !== card._id);
-    //       setCards(cardsCopy)
-    //     }
-    //     )
-    //     .catch((err) => {
-    //       console.log(err);
-    //     })
-    // }
-    for (let i = 0; i < beds.length; ++i) {
-      console.log("delete")
-      if (bed.name === beds[i]) {
-        beds.splice(i, 1)
-      }
-    }
-  }
-
-
-  const handleNoteDelete = (note) => {
-    // if (card.owner._id === currentUser._id) {
-    //   api.deleteCard(card._id)
-    //     .then(() => {
-    //       const cardsCopy = cards.filter(elem => elem._id !== card._id);
-    //       setCards(cardsCopy)
-    //     }
-    //     )
-    //     .catch((err) => {
-    //       console.log(err);
-    //     })
-    // }
-    for (let i = 0; i < notes.length; ++i) {
-      console.log("delete")
-      if (note === notes[i]) {
-        notes.splice(i, 1)
-      }
-    }
-
-  }
-
 
 
   const gardenComponent = () => {
     return (
       <>
         <Header signOut={signOut} buttonText="Выйти" link="/sign-up" userEmail={userData.email} />
-        <Garden beds={beds} notes={notes} onAddBed={handleAddBedClick} onAddNote={handleAddNoteClick}/>
+        <Garden onNoteDelete={handleNoteDelete} onBedDelete={handleBedDelete} beds={beds} notes={notes} onAddBed={handleAddBedClick} onAddNote={handleAddNoteClick}/>
         <Footer />
-        <AddBedPopup onBesDelete={handleBedDelete} onSubmit={handleAddBedSubmit} onClose={closeAllPopups} isOpen={isAddBedPopupOpen}/>
-        <AddNotePopup onNoteDelete={handleNoteDelete} onSubmit={handleAddNoteSubmit} onClose={closeAllPopups} isOpen={isAddNotePopupOpen}/>
+        <AddBedPopup makeId={beds.length}   onSubmit={handleAddBedSubmit} onClose={closeAllPopups} isOpen={isAddBedPopupOpen}/>
+        <AddNotePopup makeId={notes.length}   onSubmit={handleAddNoteSubmit} onClose={closeAllPopups} isOpen={isAddNotePopupOpen}/>
       </>
     )
   }

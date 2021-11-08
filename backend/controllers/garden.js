@@ -3,7 +3,7 @@ const Note = require('../models/note');
 const DataError = require('../errors/dataError');
 const NotFoundError = require('../errors/notFoundError');
 
-module.exports.getBeds = (req, res, next) => {
+module.exports.getBed = (req, res, next) => {
   Bed.find({})
     .then((cards) => res.send(cards))
     .catch(next);

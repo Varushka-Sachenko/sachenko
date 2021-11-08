@@ -24,7 +24,7 @@ export default function AddNotePopup (props){
     // Запрещаем браузеру переходить по адресу формы
     event.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
-    props.onSubmit({title:title, text: text})
+    props.onSubmit({name:title, text: text, _id:props.makeId})
     
 }
 

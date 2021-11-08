@@ -28,7 +28,7 @@ export default function AddBedPopup (props){
     // Запрещаем браузеру переходить по адресу формы
     event.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
-    props.onSubmit({name:cardName, soil: soil, light: light})
+    props.onSubmit({name:cardName, soil: soil, light: light, _id:props.makeId})
     
 }
 
