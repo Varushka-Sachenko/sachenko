@@ -16,16 +16,14 @@
 
 .planer__calend{
   max-width: 880px;
-  border: 1px solid rgb(84,84,84, .7);
-  margin: auto;
-  height: 20px;
   margin-top: 20px;
+  width: 50%;
+  min-height: 500px;
 }
 
 .planer__list{
-  max-width: 30%;
+  width: 30%;
   border: 1px solid rgb(84,84,84, .7);
-  margin: auto;
   margin-top: 20px;
   padding-bottom: 20px;
 }
@@ -42,7 +40,6 @@
   padding: 10px 0;
   text-align: center;
   border-bottom: 2px solid rgb(84,84,84, .7);
-  border-left: 4px solid rgb(84,84,84, .7);
 }
 
 .planer__wrap{
@@ -51,4 +48,11 @@
   display: flex;
   
   margin-bottom: 20px;
+}
+
+.planer__cont{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 30px;
+  margin-bottom: 40px;
 }

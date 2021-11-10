@@ -62,3 +62,16 @@
     font-size: 20px;
     line-height: 22px;
 }
+
+.blocks__elem{
+    display: flex;
+    justify-content: center;
+}
+
+.blocks{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 80px;
+}

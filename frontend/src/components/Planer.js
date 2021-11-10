@@ -7,7 +7,8 @@ function Planer(props) {
       <h1 className="planer__header">Планер</h1>
 
 
-      <div className="planer__calend"></div>
+      <div className="planer__cont">
+      <iframe className="planer__calend" title="calendar" src="https://calendar.yandex.ru/embed/month?&layer_ids=1552013&tz_id=Europe/Moscow&layer_names=Мои события" frameborder="0"></iframe>
       <div className="planer__list">
         <div className="planer__wrap">
           <h2 className="planer__list-header">Список покупок</h2>
@@ -20,6 +21,8 @@ function Planer(props) {
           })}
         </div>
       </div>
+      </div>
+      
     </section>
   )
 }
